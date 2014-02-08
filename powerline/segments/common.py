@@ -795,9 +795,11 @@ Highlight groups used: ``network_load_sent_gradient`` (gradient) or ``network_lo
 
 @requires_segment_info
 def virtualenv(pl, segment_info):
-	'''Return the name of the current Python virtualenv.'''
-	return os.path.basename(segment_info['environ'].get('VIRTUAL_ENV', '')) or None
+    '''Return the name of the current Python virtualenv.'''
+    virtual_env_name = os.path.basename(segment_info['environ'].get('VIRTUAL_ENV_NAME', '')) or None
+    virtual_env = os.path.basename(segment_info['environ'].get('VIRTUAL_ENV', '')) or None
 
+    return virtual_env if not virtual_env_name else virtual_env_name
 
 _IMAPKey = namedtuple('Key', 'username password server port folder')
 
